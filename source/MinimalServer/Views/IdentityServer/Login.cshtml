@@ -1,0 +1,44 @@
+﻿@model IdentityServer3.Core.ViewModels.LoginViewModel
+@{
+    ViewBag.Title = "Login";
+}
+
+<div>
+    Would use JavaScript to show/hide sections as appropriate.
+</div>
+<div>
+    Need an account? Register form goes here...
+    <strong>If @@Html.AntiForgeryToken() is present, then bug occurs. Comment out to see the bug go away.</strong>
+    @Html.AntiForgeryToken()
+</div>
+<div>
+    Already have an account? Sign in below.
+    <form name="form" method="post" action="@Model.LoginUrl" class="form-horizontal" role="form" novalidate>
+        <input type="hidden" name="@Model.AntiForgery.Name" value="@Model.AntiForgery.Value" />
+        @if (!String.IsNullOrEmpty(Model.ErrorMessage))
+        {
+            <div class="validation-summary-errors">
+                @Model.ErrorMessage
+            </div>
+        }
+        <div class="account-box">
+            <div class="section">
+                <div>
+                    <label class="control-label" for="username">Email</label>
+                </div>
+                <input type="email" class="form-control" id="username" name="username" value="@Model.Username" />
+            </div>
+            <div class="section">
+                <div>
+                    <label class="control-label" for="password">Password</label>
+                </div>
+                <input type="password" class="form-control" id="password" name="password" />
+            </div>
+            <div class="section">
+                <a href="#" id="SubmitSignInButton" class="main-button">Sign in</a>
+                <input type="submit" class="hidden-submit-button">
+            </div>
+        </div>
+    </form>
+
+</div>
